@@ -4,19 +4,19 @@ JobHub is a job search website that utilizes advanced technology to provide user
 
 ## Features
 
-### Autosuggestion: The website uses advanced algorithms to suggest job listings based on user input, such as skills and job title.
-### Filtering: Users can filter job listings by location, salary range, job type, industry, and other criteria.
-### Saved Searches: Users can save their search criteria and receive notifications when new jobs matching their criteria become available.
-### Application Tracking: Users can keep track of the jobs they have applied for and their application status.
-### Career Resources: The website offers a variety of career resources, including resume tips, interview advice, and industry insights.
+1. Autosuggestion: The website uses advanced algorithms to suggest job listings based on user input, such as skills and job title.
+2. Filtering: Users can filter job listings by location, salary range, job type, industry, and other criteria.
+3. Saved Searches: Users can save their search criteria and receive notifications when new jobs matching their criteria become available.
+4. Application Tracking: Users can keep track of the jobs they have applied for and their application status.
+5. Career Resources: The website offers a variety of career resources, including resume tips, interview advice, and industry insights.
 
 ## Technologies Used
 
-### HTML/CSS
-### Django
-### PostgreSQL
-### RESTful API
-### Natural Language Processing (Transformers) for Autosuggestion
+1. HTML/CSS
+2. Django
+3. PostgreSQL
+3. RESTful API
+4. Natural Language Processing (Transformers) for Autosuggestion
 
 ## Getting Started
 
