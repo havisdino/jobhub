@@ -24,5 +24,5 @@ To get started with the project, simply clone the repository and follow the inst
 
 ## Contributors
 
-[Ha Dinh](github.com/havisdino)  
+[Ha Dinh](https://github.com/havisdino)  
 We welcome contributions from the organization! If you're interested in contributing to the project, please fork the repository and submit a pull request with your changes.
