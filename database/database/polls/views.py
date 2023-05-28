@@ -13,3 +13,6 @@ def viewdata(request):
 def detailview(request,company_id):
     c = company.objects.get(pk = company_id)
     return render(request,"polls/detail.html",{"com": c})
+
+def login(request):
+    return render(request,"polls/login.html")
