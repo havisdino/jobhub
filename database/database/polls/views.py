@@ -16,3 +16,6 @@ def detailview(request,company_id):
 
 def login(request):
     return render(request,"polls/login.html")
+
+def forgot_password(request):
+    return render(request,"polls/forgot-password.html")
