@@ -19,3 +19,6 @@ def login(request):
 
 def forgot_password(request):
     return render(request,"polls/forgot-password.html")
+
+def register(request):
+    return render(request,"polls/register.html")

@@ -11267,7 +11267,6 @@ a:hover {
   clip: rect(0, 900px, 0, 0);
   animation: noise-anim-2 3s infinite linear alternate-reverse;
 }
-
 footer.sticky-footer {
   padding: 2rem 0;
   flex-shrink: 0;
@@ -11323,7 +11322,6 @@ body.sidebar-toggled footer.sticky-footer {
   z-index: 0;
   overflow: hidden;
 }
-
 .card1:before {
   content: "";
   position: absolute;
