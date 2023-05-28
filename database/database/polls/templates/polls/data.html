@@ -1,0 +1,21 @@
+{% extends "polls/base.html" %}
+
+{% block content %}
+    {%if ds%}
+        {% for i in ds %}
+            <div class="card">
+                <a class="card1" href="{%url 'detailview' i.id%}">
+                 <p>{{i.name}}</p>
+                 <p class="small">Card description with lots of great facts and interesting details.</p>
+                 <div class="go-corner" href="#">
+                   <div class="go-arrow">
+                     →
+                   </div>
+                 </div>
+               </a>
+             </div>
+        {% endfor %}
+    {% else %}
+        <h1>khong co du lieu</h1>
+    {% endif %}        
+{% endblock %}
