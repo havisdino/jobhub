@@ -1,0 +1,31 @@
+{% extends "polls/base.html" %}
+
+{% block content %}
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Company you applied</h1>
+                        <a href="{%url 'resume' %}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                                class="fas fa-download fa-sm text-white-50"></i> Update resume</a>
+        </div>
+        <div class="table-wrapper">
+    <table class="fl-table">
+        <thead>
+        <tr>
+            <th>STT</th>
+            <th>Tên công ty</th>
+            <th>Mã profile</th>
+            <th>Time</th>
+        </tr>
+        </thead>
+        <tbody>
+            {%for i in app%}
+                <tr>
+                    <td>{{i.id}}</td>
+                    <td>{{i.recuitment_id.name}}</td>
+                    <td>{{i.profile_id.id}}</td>
+                    <td>{{i.time}}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+        </table>
+        </div>
+{% endblock %}

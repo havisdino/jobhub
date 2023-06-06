@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import company
+from .models import company,application
+from .forms import PostProfile
 # Create your views here.
 def index(request):
     return render(request,"polls/index.html")
@@ -22,3 +23,24 @@ def forgot_password(request):
 
 def register(request):
     return render(request,"polls/register.html")
+
+def hisview(request):
+    c = application.objects.all()
+    context = {"app":c}
+    return render(request,"polls/history_view.html",context)
+
+def myresume(request):
+    a = PostProfile()
+    return render(request,"polls/resume.html",{'f': a})
+
+def save_profile(request):
+    if request.method == "POST":
+        q = PostProfile(request.POST)
+        if q.is_valid():
+            q.save()
+            return HttpResponse("da luu")
+        else:
+            return HttpResponse("khong luu duoc")
+    else:
+        return HttpResponse("khong phai post request")    
+    

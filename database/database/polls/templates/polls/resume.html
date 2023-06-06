@@ -1,0 +1,53 @@
+{% extends "polls/base.html" %}
+
+{% block content %}
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Enter your information</h1>
+                        <a href="{%url 'resume' %}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                                class="fas fa-download fa-sm text-white-50"></i> Update resume</a>
+        </div>
+    <form class="form" action ="{%url 'save'%}" method="POST">
+        {% csrf_token %}
+        <div class="flex">
+            <label>
+                {{ f.first_name }}
+                <span>first name</span>
+            </label>
+
+            <label>
+                {{ f.last_name}}
+                <span>last name</span>
+            </label>
+        </div>
+
+        <label>
+            {{f.email}}
+            <span>email</span>
+        </label>
+
+        <label>
+            {{f.dob}}
+            <span>Date of birth</span>
+        </label>
+
+        <label>
+            {{f.phone}}
+            <span>phone number</span>
+        </label>
+        
+        <label>
+            {{f.address}}
+            <span>address</span>
+        </label>
+        <label>
+            {{f.description_text}}
+            <span>description</span>
+        </label>   
+        <button class="fancy" type="submit">
+      <span class="top-key"></span>
+      <span class="text">submit</span>
+      <span class="bottom-key-1"></span>
+      <span class="bottom-key-2"></span>
+    </button>
+</form>
+{% endblock %}
