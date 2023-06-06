@@ -1,5 +1,5 @@
-#include "../include/func.hpp"
+#include "include/crow_all.h"
 
-std::string test() {
-    return "Hello, world";
+int main() {
+    return 0;
 }
