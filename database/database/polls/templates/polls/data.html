@@ -1,11 +1,70 @@
 {% extends "polls/base.html" %}
 
 {% block content %}
+<<<<<<< Updated upstream
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">Are you seeking for a job ?</h1>
                         <a href="{%url 'resume' %}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                 class="fas fa-download fa-sm text-white-50"></i> Update resume</a>
                     </div>
+=======
+<div class="main">
+    <div class="main1">
+      <div class="criteria">
+          <div class="sort">
+              <p>Sort by</p>
+              <div class="sort-list">
+                  <li><button> Relevancy</button></li>
+                  <li><button> Latest</button></li>
+              </div>
+          </div>
+
+          <div class="typeofwork">
+              <p>Type of work</p>
+              <div class="type-list">
+                  <li><label class="material-checkbox"><input type="checkbox"><span class="checkmark"></span>By date</label></li>
+                  <li><label class="material-checkbox"><input type="checkbox"><span class="checkmark"></span>Internship</label></li>
+                  <li><label class="material-checkbox"><input type="checkbox"><span class="checkmark"></span>Full time job</label></li>
+                  <li><label class="material-checkbox"><input type="checkbox"><span class="checkmark"></span>Part time job</label></li>
+                  <li><label class="material-checkbox"><input type="checkbox"><span class="checkmark"></span>Freelance job</label></li>
+              </div>
+          </div>
+
+          <div class="city">
+              <p>City</p>
+              <div class="city-list">
+                  <li><label class="material-checkbox"><input type="checkbox"><span class="checkmark"></span>Ha Noi</li>
+                  <li><label class="material-checkbox"><input type="checkbox"><span class="checkmark"></span>Ho Chi Minh</li>
+                  <li><label class="material-checkbox"><input type="checkbox"><span class="checkmark"></span>Hai Phong</li>
+                  <li><label class="material-checkbox"><input type="checkbox"><span class="checkmark"></span>Da Nang</li>
+                  <li><label class="material-checkbox"><input type="checkbox"><span class="checkmark"></span>Binh Duong</li>
+              </div>
+          </div>
+
+          <div class="experience">
+              <p>Experience</p>
+              <div class="experience-list">
+                  <li><label class="material-checkbox"><input type="checkbox"><span class="checkmark"></span>Less than 1 years</li>
+                  <li><label class="material-checkbox"><input type="checkbox"><span class="checkmark"></span>1-3 years</li>
+                  <li><label class="material-checkbox"><input type="checkbox"><span class="checkmark"></span>3-5 years</li>
+                  <li><label class="material-checkbox"><input type="checkbox"><span class="checkmark"></span>5-10 years</li>
+                  <li><label class="material-checkbox"><input type="checkbox"><span class="checkmark"></span>More than 10 years</li>
+              </div>
+          </div>
+          
+          <div class="update">
+              <p>Last update</p>
+              <div class="update-list">
+                  <li><label class="material-checkbox"><input type="checkbox"><span class="checkmark"></span>Last 24 hours</li>
+                  <li><label class="material-checkbox"><input type="checkbox"><span class="checkmark"></span>Last week</li>
+                  <li><label class="material-checkbox"><input type="checkbox"><span class="checkmark"></span>Last month</li>
+                  <li><label class="material-checkbox"><input type="checkbox"><span class="checkmark"></span>Anytime</li>
+              </div>
+          </div>
+      </div>
+    </div>
+    <div class="company">
+>>>>>>> Stashed changes
     {%if ds%}
         {% for i in ds %}
             <div class="card">
@@ -22,5 +81,7 @@
         {% endfor %}
     {% else %}
         <h1>khong co du lieu</h1>
-    {% endif %}        
+    {% endif %} 
+    </div>  
+</div>     
 {% endblock %}

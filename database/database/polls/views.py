@@ -1,12 +1,17 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+<<<<<<< Updated upstream
 from .models import company,application
 from .forms import PostProfile
+=======
+from .models import company
+
+>>>>>>> Stashed changes
 # Create your views here.
 def index(request):
     return render(request,"polls/index.html")
 
-def viewdata(request):
+def view_data(request):
     c = company.objects.all()
     context = {"ds": c}
     return render(request,"polls/data.html",context)
@@ -24,6 +29,7 @@ def forgot_password(request):
 def register(request):
     return render(request,"polls/register.html")
 
+<<<<<<< Updated upstream
 def hisview(request):
     c = application.objects.all()
     context = {"app":c}
@@ -44,3 +50,7 @@ def save_profile(request):
     else:
         return HttpResponse("khong phai post request")    
     
+=======
+def search(request):
+    pass
+>>>>>>> Stashed changes
