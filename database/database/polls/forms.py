@@ -8,7 +8,7 @@ class PostProfile(forms.ModelForm):
         widgets = {
             'first_name' : forms.TextInput(attrs={'class': "input"}),
             'last_name' : forms.TextInput(attrs={'class': "input"}),
-            'dob' : forms.DateInput(attrs={'class': "input"}),
+            'dob' : forms.DateInput(format=('%d-%m-%Y'),attrs={'class': "input"}),
             'email' : forms.TextInput(attrs={'class': "input"}),
             'phone' : forms.TextInput(attrs={'class': "input"}),
             'address': forms.TextInput(attrs={'class': "input"}),
