@@ -1,15 +1,17 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
-<<<<<<< Updated upstream
-from .models import company,application
+from .models import company,application,profile
 from .forms import PostProfile
-=======
-from .models import company
-
->>>>>>> Stashed changes
+from django.contrib import messages
+from django.views import View
+from django.contrib.auth import authenticate,login,decorators
+from django.contrib.auth.models import User
+from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
-def index(request):
-    return render(request,"polls/index.html")
+
+class classIndex(View):
+    def get(View,request):
+        return render(request,"polls/index.html")
 
 def view_data(request):
     c = company.objects.all()
@@ -20,37 +22,50 @@ def detailview(request,company_id):
     c = company.objects.get(pk = company_id)
     return render(request,"polls/detail.html",{"com": c})
 
-def login(request):
-    return render(request,"polls/login.html")
+class Weblogin(View):
+    def get(view,request):
+        return render(request,"polls/login.html")
+    
+    def post(View,request):
+        user_name = request.POST.get('useremail')
+        matkhau = request.POST.get('password')
+        my_user = authenticate(username=user_name,password=matkhau)
+        if my_user is None:
+            return redirect("/forgot_password/")
+        login(request,my_user)
+        return redirect("/")
 
+class Viewuser(View,LoginRequiredMixin):
+    login_url = "/login/"
+    def get(self,request):
+        if not request.user.is_authenticated:
+            return redirect("/login/")
+        else:
+            return redirect("/")
 def forgot_password(request):
     return render(request,"polls/forgot-password.html")
 
 def register(request):
     return render(request,"polls/register.html")
 
-<<<<<<< Updated upstream
 def hisview(request):
     c = application.objects.all()
     context = {"app":c}
     return render(request,"polls/history_view.html",context)
 
-def myresume(request):
-    a = PostProfile()
-    return render(request,"polls/resume.html",{'f': a})
-
-def save_profile(request):
-    if request.method == "POST":
+        
+class tmp(LoginRequiredMixin,View):
+    login_url = "/login/"
+    def get(View,request):
+            c = profile.objects.last()
+            a = PostProfile()
+            context = {'f':a, 'pro': c}
+            return render(request,"polls/tmp_resume.html",context)
+    def post(View,request):
         q = PostProfile(request.POST)
         if q.is_valid():
             q.save()
-            return HttpResponse("da luu")
+            messages.info(request, 'Profile của bạn đã được cập nhật!')
         else:
-            return HttpResponse("khong luu duoc")
-    else:
-        return HttpResponse("khong phai post request")    
-    
-=======
-def search(request):
-    pass
->>>>>>> Stashed changes
+            messages.info(request, 'Opps! không lưu được rồi!')
+        return redirect("/tmp_resume/")

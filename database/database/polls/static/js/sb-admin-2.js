@@ -54,3 +54,6 @@
   });
 
 })(jQuery); // End of use strict
+$('Modal').on('shown.bs.modal', function () {
+  $('#myInput').trigger('focus')
+});

@@ -1,13 +1,6 @@
 {% extends "polls/base.html" %}
 
 {% block content %}
-<<<<<<< Updated upstream
-        <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Are you seeking for a job ?</h1>
-                        <a href="{%url 'resume' %}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                class="fas fa-download fa-sm text-white-50"></i> Update resume</a>
-                    </div>
-=======
 <div class="main">
     <div class="main1">
       <div class="criteria">
@@ -64,13 +57,13 @@
       </div>
     </div>
     <div class="company">
->>>>>>> Stashed changes
     {%if ds%}
         {% for i in ds %}
             <div class="card">
                 <a class="card1" href="{%url 'detailview' i.id%}">
                  <p>{{i.name}}</p>
-                 <p class="small">Card description with lots of great facts and interesting details.</p>
+                 <p class="small" >{{i.phone}}</p>
+                 <p class="small" >{{i.email}}</p>
                  <div class="go-corner" href="#">
                    <div class="go-arrow">
                      →

@@ -11,7 +11,21 @@
     <meta name="author" content="">
 
     <title>JOBHUB.</title>
+    <link href="{% static 'img/favicon.png' %}" rel="icon">
+  <link href="{% static 'img/apple-touch-icon.png' %}" rel="apple-touch-icon">
 
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+  <link href="{% static 'vendor/quill/quill.snow.css' %}" rel="stylesheet">
+  <link href="{% static 'vendor/quill/quill.bubble.css' %}" rel="stylesheet">
+  <link href="{% static 'vendor/remixicon/remixicon.css' %}" rel="stylesheet">
+  <link href="{% static 'vendor/simple-datatables/style.css' %}" rel="stylesheet">
     <!-- Custom fonts for this template-->
     <link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
     <link
@@ -19,18 +33,13 @@
         rel="stylesheet">
     
     <!-- Custom styles for this template-->
-<<<<<<< Updated upstream
-    <link href="{% static '\css\sb-admin-2.css' %}" rel="stylesheet">
-    <link rel="stylesheet" href="{% static '\css\styles.css' %}">
-=======
     <link href="{% static '\css\sb-admin.css' %}" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Jost:wght@700&display=swap" rel="stylesheet">
-    
+    <link rel="stylesheet" href="{% static '\css\styles.css' %}">
     <link rel="stylesheet"
       href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
->>>>>>> Stashed changes
 </head>
 
 <body id="page-top">
@@ -88,16 +97,16 @@
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                     aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-fw fa-wrench"></i>
-                    <span>Utilities</span>
+                    <span>Resume</span>
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Utilities:</h6>
-                        <a class="collapse-item" href="utilities-color.html">Colors</a>
-                        <a class="collapse-item" href="utilities-border.html">Borders</a>
-                        <a class="collapse-item" href="utilities-animation.html">Animations</a>
-                        <a class="collapse-item" href="utilities-other.html">Other</a>
+                        <h6 class="collapse-header">My Resume:</h6>
+                        <a class="collapse-item" href="{% url 'resume' %}">Overview</a>
+                        <a class="collapse-item" href="{% url 'resume' %}">Edit Profile</a>
+                        <a class="collapse-item" href="{% url 'resume' %}">Settings</a>
+                        <a class="collapse-item" href="{% url 'resume' %}">Change Password</a>
                     </div>
                 </div>
             </li>
@@ -135,14 +144,14 @@
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'hisview' %}">
                     <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Companies you applied</span></a>
+                    <span>Applied History</span></a>
             </li>
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
                 <a class="nav-link" href="{%url 'resume' %}">
                     <i class="fas fa-fw fa-table"></i>
-                    <span>Your resume</span></a>
+                    <span>Q&A</span></a>
             </li>
 
             <!-- Divider -->
@@ -343,7 +352,7 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
                                 <img class="img-profile rounded-circle"
-                                    src="{% static 'img/undraw_profile.svg' %}">
+                                    src="{% static 'img/profile-img.jpg' %}">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -376,9 +385,11 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
+                    <div id="content" style="margin-bottom: 4rem;">
                     {% block content%}
                     
                     {% endblock %}
+                </div>
             <!-- End of Main Content -->
 
             <!-- Footer -->
@@ -440,6 +451,17 @@
     <script src="{% static 'js/demo/chart-area-demo.js' %}"></script>
     <script src="{% static 'js/demo/chart-pie-demo.js' %}"></script>
 
+        <script src="{% static 'vendor/apexcharts/apexcharts.min.js' %}"></script>
+  <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min_2.js' %}"></script>
+  <script src="{% static 'vendor/chart.js/chart.umd.js' %}"></script>
+  <script src="{% static 'vendor/echarts/echarts.min.js' %}"></script>
+  <script src="{% static 'vendor/quill/quill.min.js' %}"></script>
+  <script src="{% static 'vendor/simple-datatables/simple-datatables.js' %}"></script>
+  <script src="{% static 'vendor/tinymce/tinymce.min.js' %}"></script>
+  <script src="{% static 'vendor/php-email-form/validate.js' %}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{% static 'js/main.js' %}"></script>
 </body>
 
 </html>

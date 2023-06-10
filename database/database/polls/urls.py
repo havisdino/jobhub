@@ -1,26 +1,13 @@
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path,include
 from . import views
-
 urlpatterns = [
-<<<<<<< Updated upstream
-    path("",views.index,name="index"),
-    path("data/",views.viewdata,name = "data"),
+    path("",views.classIndex.as_view(),name="index"),
+    path("data/",views.view_data,name = "data"),
     path("detail/<int:company_id>",views.detailview,name = "detailview"),
-    path("login/",views.login,name = "login"),
+    path("login/",views.Weblogin.as_view(),name = "login"),
     path("forgot_password/",views.forgot_password,name ="forgot"),
     path("register/",views.register,name="register"),
     path("applications/",views.hisview,name = "hisview"),
-    path("myresume/",views.myresume,name= "resume"),
-    path("save/",views.save_profile,name='save')
+    path("tmp_resume/",views.tmp.as_view(),name="resume")
 ]
-=======
-    path("", views.index, name="index"),
-    path("data/", views.view_data, name="data"),
-    path("detail/<int:company_id>", views.detailview, name="detailview"),
-    path("login/", views.login, name="login"),
-    path("forgot_password/", views.forgot_password, name="forgot"),
-    path("register/", views.register, name="register"),
-    path('search/', views.search, name="search"),
-]
->>>>>>> Stashed changes

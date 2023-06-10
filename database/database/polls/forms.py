@@ -4,7 +4,7 @@ from .models import profile
 class PostProfile(forms.ModelForm):
     class Meta:
         model = profile
-        fields = {'first_name','last_name','dob','email','phone','address','description_text'}
+        fields = {'first_name','last_name','dob','email','phone','address','description_text','country','facebook'}
         widgets = {
             'first_name' : forms.TextInput(attrs={'class': "input"}),
             'last_name' : forms.TextInput(attrs={'class': "input"}),
@@ -12,5 +12,7 @@ class PostProfile(forms.ModelForm):
             'email' : forms.TextInput(attrs={'class': "input"}),
             'phone' : forms.TextInput(attrs={'class': "input"}),
             'address': forms.TextInput(attrs={'class': "input"}),
-            'description_text': forms.Textarea(attrs={'class':"input01"})
+            'description_text': forms.Textarea(attrs={'class':"input01"}),
+            'country': forms.TextInput(attrs={'class': "input"}),
+            'facebook': forms.URLInput(attrs={'class': "input"})
         }
