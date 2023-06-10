@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import company,application,profile
+from .models import company,application,profile,recuitment_new
 from .forms import PostProfile
 from django.contrib import messages
 from django.views import View
@@ -69,3 +69,9 @@ class tmp(LoginRequiredMixin,View):
         else:
             messages.info(request, 'Opps! không lưu được rồi!')
         return redirect("/tmp_resume/")
+    
+class recuit(View):
+    def get(View,request):
+        c = company.objects.all()
+        context = {"ds": c}
+        return render(request,"polls/news.html",context)
