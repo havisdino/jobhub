@@ -9,5 +9,7 @@ urlpatterns = [
     path("forgot_password/",views.forgot_password,name ="forgot"),
     path("register/",views.register,name="register"),
     path("applications/",views.hisview,name = "hisview"),
-    path("tmp_resume/",views.tmp.as_view(),name="resume")
+    path("tmp_resume/",views.tmp.as_view(),name="resume"),
+    path("news/",views.recuit.as_view(),name='news'),
+    path("new/detail/<int:new_id>",views.detail_new.as_view(),name="new_detail")
 ]

@@ -60,10 +60,8 @@
     {%if ds%}
         {% for i in ds %}
             <div class="card">
-                <a class="card1" href="{%url 'detailview' i.id%}">
+                <a class="card1" href="{%url 'new_detail' i.id %}">
                  <p>{{i.name}}</p>
-                 <p class="small" >{{i.phone}}</p>
-                 <p class="small" >{{i.email}}</p>
                  <div class="go-corner" href="#">
                    <div class="go-arrow">
                      →

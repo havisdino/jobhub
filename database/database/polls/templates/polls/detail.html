@@ -16,4 +16,10 @@
     </tr>
     </table>
     <p>{{com.description_text}}</p>
+    <h3>Company's recuitment new</h3>
+    <ul>
+        {%for i in recuit%}
+        <Li><a href="{%url 'new_detail' i.id%}">{{i.name}}</a></Li>
+        {% endfor %}
+    </ul>
 {% endblock %}

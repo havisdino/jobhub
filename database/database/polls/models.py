@@ -29,7 +29,7 @@ class company(models.Model):
         return self.name
 
 class recuitment_new(models.Model):
-    company_id = models.ForeignKey(company, on_delete=models.CASCADE)
+    company = models.ForeignKey(company, on_delete=models.CASCADE)
     name = models.CharField(max_length=50)
     job_descrip = models.CharField(max_length=500)
     job_demand = models.CharField(max_length=500)

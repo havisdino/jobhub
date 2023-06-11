@@ -20,7 +20,9 @@ def view_data(request):
 
 def detailview(request,company_id):
     c = company.objects.get(pk = company_id)
-    return render(request,"polls/detail.html",{"com": c})
+    r = recuitment_new.objects.filter(company = company_id)
+    context = {"com":c, "recuit": r}
+    return render(request,"polls/detail.html",context)
 
 class Weblogin(View):
     def get(view,request):
@@ -72,6 +74,12 @@ class tmp(LoginRequiredMixin,View):
     
 class recuit(View):
     def get(View,request):
-        c = company.objects.all()
+        c = recuitment_new.objects.all()
         context = {"ds": c}
         return render(request,"polls/news.html",context)
+    
+class detail_new(View):
+    def get(View,request,new_id):
+        r = recuitment_new.objects.get(pk = new_id)
+        context = {"new": r}
+        return render(request,"polls/detail_new.html",context)

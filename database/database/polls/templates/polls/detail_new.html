@@ -1,0 +1,8 @@
+{% extends "polls/base.html" %}
+
+{% block content %}
+{{new.name}}
+{{new.job_descrip}}
+{{new.job_demand}}
+<a href="{%url 'detailview' new.company.id %}">{{new.company}}</a>
+{% endblock %}
