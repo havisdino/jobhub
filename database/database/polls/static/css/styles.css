@@ -291,3 +291,7 @@
     outline: none;
     cursor: pointer;
   }
+
+card-title h6 {
+  color: #4e73df;
+}
