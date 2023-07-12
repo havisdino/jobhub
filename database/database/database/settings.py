@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-+r#ospj8c1g)is^q*@*rvqi8ue&cn@z_1%w)+6viwh1^$%f(+#
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 
 # Application definition
@@ -70,22 +70,16 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "database.wsgi.application"
 
-
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
     "default": {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-
-        'NAME': 'jobhub1',
-
+        'NAME': 'jobhub',
         'USER': 'postgres',
-
-        'PASSWORD': '27112003',
-
+        'PASSWORD': 'admin',
         'HOST': 'localhost',
-
         'PORT': '5432',
     }
 }

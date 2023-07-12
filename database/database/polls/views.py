@@ -134,7 +134,10 @@ def sreach(request):
         sreached = request.POST['sreached']
         companySreached = company.objects.filter(name__contains=sreached)
         recuit_sreach = recuitment_new.objects.filter(name__contains=sreached)
-        return render(request, "polls/sreach_result.html", {'sreached': sreached, 'companys': companySreached, 'recuit': recuit_sreach})
+        return render(
+            request, "polls/sreach_result.html",
+            {'sreached': sreached, 'companys': companySreached, 'recuit': recuit_sreach}
+        )
 
 
 def qna(request):
@@ -149,9 +152,9 @@ def add_com(request):
             com.employer = request.user.id
             com.save()
             messages.info(
-                request, 'Profile của bạn đã được cập nhật!')
+                request, 'Your profile has been updated!')
         else:
-            messages.info(request, 'Opps! không lưu được rồi!')
+            messages.info(request, 'Opps! Something went wrong!')
         return redirect("/my_com/")
     else:
         form = PostCompany
