@@ -1,14 +1,16 @@
 {% extends "polls/base.html" %}
 
 {% block content %}
-{{new.name}}
-{{new.job_descrip}}
-{{new.job_demand}}
-<a href="{%url 'detailview' new.company.id %}">{{new.company}}</a>
+<p>name:{{new.name}}</p>
+<p>Mô tả công việc: {{new.job_descrip}}</p>
+<p>Yêu cầu công việc: {{new.job_demand}}</p>
+<p>Lương: {{new.salary}} $</p>
+<p> Công ty: <a href="{%url 'detailview' new.company.id %}" style="text-transform: uppercase;">{{new.company.name}}</a></p>
+<img src="{{new.company.company_img.url}}" alt="">
 
 <form method="POST"action="">
     {% csrf_token %}
-    <button type="submit" class="btn btn-primary">APPLY</button>
+    <button type="submit" class="btn btn-primary">Ứng tuyển ngay</button>
 </form>
     {% if messages %}
     {% for message in messages %}

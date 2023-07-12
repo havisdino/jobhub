@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="main">
-    <div class="main1">
+    <!-- <div class="main1">
       <div class="criteria">
           <div class="sort">
               <p>Sort by</p>
@@ -55,26 +55,34 @@
               </div>
           </div>
       </div>
-    </div>
+    </div> -->
     <div class="company">
     {%if ds%}
         {% for i in ds %}
-            <div class="card">
-                <a class="card1" href="{%url 'detailview' i.id%}">
-                 <p>{{i.name}}</p>
-                 <p class="small" >{{i.phone}}</p>
-                 <p class="small" >{{i.email}}</p>
-                 <div class="go-corner" href="#">
-                   <div class="go-arrow">
-                     →
-                   </div>
-                 </div>
-               </a>
-             </div>
+        <div class="card shadow mb-4" style="display: block;">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary"><a href="{%url 'detailview' i.id%}" style="text-transform: uppercase;">{{i.name}}</a></h6>
+            </div>
+            <div class="card-body" style="padding: 1rem;">
+               <div class="row">
+                <div class="col-10">
+                <strong style="margin-top: 1rem;">About</strong>
+             <p style="max-width: 80%;text-overflow: ellipsis;overflow: hidden;">{{i.description_text}}</p>
+             <p class="small" >Phone: {{i.phone}}</p>
+             <p class="small" >Email: {{i.email}}</p>
+            </div>
+            <div class="col-2">
+                {%if i.company_img %}
+                <img src="{{i.company_img.url}}" alt="{{i.name}}" style="width: 100%;">
+                {% endif %}
+            </div>
+               </div>
+            </div>
+        </div>
         {% endfor %}
     {% else %}
         <h1>khong co du lieu</h1>
     {% endif %} 
-    </div>  
+</div>  
 </div>     
 {% endblock %}

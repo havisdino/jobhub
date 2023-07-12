@@ -59,14 +59,23 @@
     <div class="company">
     {%if ds%}
         {% for i in ds %}
-            <div class="card">
+            <div class="ncard">
                 <a class="card1" href="{%url 'new_detail' i.id %}">
-                 <p>{{i.name}}</p>
-                 <div class="go-corner" href="#">
-                   <div class="go-arrow">
-                     →
-                   </div>
-                 </div>
+                        <div class="row">
+                            <div class="col-2">
+                                <img src="{{i.company.company_img.url}}" alt="company_img" style="border-radius: 50%;width: 100%;"> 
+                            </div>
+                            <div class="col-9">
+                                <p class="ncard-title">{{i.name}}</p>
+                            </div>
+                        </div>
+                         <p class="nsmall-desc">
+                           Loại Công việc: {{i.catergory}}
+                         </p>
+                         <div class="ngo-corner">
+                           <div class="ngo-arrow">→</div>
+                         </div>
+                    
                </a>
              </div>
         {% endfor %}

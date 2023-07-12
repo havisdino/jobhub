@@ -1,0 +1,9 @@
+{% extends "polls/base.html" %}
+
+{% block content %}
+    <form action="" method="PoST">
+     {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit">update</button>
+    </form>
+{% endblock %}
