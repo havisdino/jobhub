@@ -24,14 +24,14 @@ JobHub is a job search website that utilizes advanced technology to provide user
 ```
 git clone https://github.com/havisdino/jobhub.git
 ```
-* Start ```psql``` and create a database and the owner
+* Start ```psql``` and create a database and the owner (drop any existing database named ```jobhub```)
 ```
 CREATE USER <your-user-name> WITH PASSWORD <your-pass-word>;
 CREATE DATABASE jobhub WITH OWNER <your-user-name>;
 ```
-* Go to database/database, make migrations and apply them all
+* Go to [jobhub](jobhub/), make migrations and apply them all
 ```
-cd database/database
+cd jobhub
 python manage.py makemigrations polls
 python manage.py migrate
 ```
