@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import company, application, profile, recuitment_new
+from .models import Company, Application, Profile, RecuitmentNew
 from .forms import PostProfile, PostCompany, Postnew, SignUpForm
 from django.contrib import messages
 from django.views import View
@@ -17,14 +17,14 @@ class Index(View):
 
 
 def view_data(request):
-    c = company.objects.all()
+    c = Company.objects.all()
     context = {"ds": c}
     return render(request, "polls/data.html", context)
 
 
 def detail_view(request, company_id):
-    c = company.objects.get(pk=company_id)
-    r = recuitment_new.objects.filter(company=company_id)
+    c = Company.objects.get(pk=company_id)
+    r = RecuitmentNew.objects.filter(company=company_id)
     context = {"com": c, "recuit": r}
     return render(request, "polls/detail.html", context)
 
@@ -79,7 +79,7 @@ def register(request):
 
 
 def hisview(request):
-    c = application.objects.filter(profile_id=request.user.profile)
+    c = Application.objects.filter(profile_id=request.user.profile)
     context = {"app": c}
     return render(request, "polls/history_view.html", context)
 
@@ -88,13 +88,13 @@ class TMP(LoginRequiredMixin, View):
     login_url = "/login/"
 
     def get(View, request):
-        c = profile.objects.get(user=request.user)
+        c = Profile.objects.get(user=request.user)
         a = PostProfile(instance=c)
         context = {'f': a, 'pro': c}
         return render(request, "polls/tmp_resume.html", context)
 
     def post(View, request):
-        c = profile.objects.get(user=request.user)
+        c = Profile.objects.get(user=request.user)
         q = PostProfile(request.POST, request.FILES, instance=c)
         if q.is_valid():
             q.save()
@@ -107,21 +107,21 @@ class TMP(LoginRequiredMixin, View):
 
 class Recuit(View):
     def get(View, request):
-        c = recuitment_new.objects.all()
+        c = RecuitmentNew.objects.all()
         context = {"ds": c}
         return render(request, "polls/news.html", context)
 
 
 class DetailedNew(View):
     def get(View, request, new_id):
-        r = recuitment_new.objects.get(pk=new_id)
+        r = RecuitmentNew.objects.get(pk=new_id)
         context = {"new": r}
         return render(request, "polls/detail_new.html", context)
 
     def post(view, request, new_id):
-        r = recuitment_new.objects.get(pk=new_id)
+        r = RecuitmentNew.objects.get(pk=new_id)
         if request.method == "POST":
-            created = application.objects.update_or_create(recuitment_id=r, profile_id=request.user.profile, defaults={
+            created = Application.objects.update_or_create(recuitment_id=r, profile_id=request.user.profile, defaults={
                 'recuitment_id': r, 'profile_id': request.user.profile})
             if created:
                 messages.info(
@@ -134,8 +134,8 @@ class DetailedNew(View):
 def search(request):
     if request.method == "POST":
         searched = request.POST['searched']
-        companySearched = company.objects.filter(name__contains=searched)
-        recuit_search = recuitment_new.objects.filter(name__contains=searched)
+        companySearched = Company.objects.filter(name__contains=searched)
+        recuit_search = RecuitmentNew.objects.filter(name__contains=searched)
         return render(
             request, "polls/search_result.html",
             {'searched': searched, 'companys': companySearched, 'recuit': recuit_search}
@@ -164,12 +164,12 @@ def add_com(request):
 
 
 def my_com_list(request):
-    coms = company.objects.filter(employer=request.user.id)
+    coms = Company.objects.filter(employer=request.user.id)
     return render(request, "polls/com_list.html", {'com': coms})
 
 
 def update_com(request, company_id):
-    com = company.objects.get(pk=company_id)
+    com = Company.objects.get(pk=company_id)
     form = PostCompany(request.POST or None, instance=com)
     if request.method == "POST":
         if form.is_valid():
@@ -179,26 +179,26 @@ def update_com(request, company_id):
 
 
 def my_news(request):
-    coms = company.objects.filter(employer=request.user.id)
+    coms = Company.objects.filter(employer=request.user.id)
     news = []
     for i in coms:
-        news += recuitment_new.objects.filter(company=i)
+        news += RecuitmentNew.objects.filter(company=i)
     return render(request, "polls/my_recuit_news.html", {'news': news})
 
 
 def applied_profile(request, news_id):
-    recuit = recuitment_new.objects.get(pk=news_id)
-    applied = application.objects.filter(recuitment_id=recuit)
+    recuit = RecuitmentNew.objects.get(pk=news_id)
+    applied = Application.objects.filter(recuitment_id=recuit)
     return render(request, "polls/applied_pro.html", {'applied': applied})
 
 
 def show_pro(request, profile_id):
-    pro = profile.objects.get(pk=profile_id)
+    pro = Profile.objects.get(pk=profile_id)
     return render(request, "polls/show_pro.html", {'pro': pro})
 
 
 def update_new(request, news_id):
-    new = recuitment_new.objects.get(pk=news_id)
+    new = RecuitmentNew.objects.get(pk=news_id)
     form = Postnew(request.POST or None, instance=new)
     if request.method == "POST":
         if form.is_valid():

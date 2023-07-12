@@ -4,12 +4,12 @@ from django.core.files.base import File
 from django.db.models.base import Model
 from django.forms.utils import ErrorList
 from django.contrib.auth.models import User
-from .models import profile, company, recuitment_new
+from .models import Profile, Company, RecuitmentNew
 from django.contrib.auth.forms import UserCreationForm
 
 class PostProfile(forms.ModelForm):
     class Meta:
-        model = profile
+        model = Profile
         fields = {'first_name','last_name','dob','email','phone','address','description_text','country','facebook','img'}
         widgets = {
             'first_name': forms.TextInput(attrs={'class': "input"}),
@@ -26,7 +26,7 @@ class PostProfile(forms.ModelForm):
 
 class PostCompany(forms.ModelForm):
     class Meta:
-        model = company
+        model = Company
         fields = {'name','email','phone','field','description_text','company_img'}
         widgets = {
             'name': forms.TextInput(attrs={'class': "form-control"}),
@@ -38,7 +38,7 @@ class PostCompany(forms.ModelForm):
 
 class Postnew(forms.ModelForm):
     class Meta:
-        model = recuitment_new
+        model = RecuitmentNew
         fields = {'company','catergory','name','job_descrip','job_demand'}
         widgets = {
             'name': forms.TextInput(attrs={'class': "form-control"}),
