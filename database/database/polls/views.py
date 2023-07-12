@@ -129,14 +129,14 @@ class detail_new(View):
             return redirect(request.path_info)
 
 
-def sreach(request):
+def search(request):
     if request.method == "POST":
-        sreached = request.POST['sreached']
-        companySreached = company.objects.filter(name__contains=sreached)
-        recuit_sreach = recuitment_new.objects.filter(name__contains=sreached)
+        searched = request.POST['searched']
+        companySearched = company.objects.filter(name__contains=searched)
+        recuit_search = recuitment_new.objects.filter(name__contains=searched)
         return render(
-            request, "polls/sreach_result.html",
-            {'sreached': sreached, 'companys': companySreached, 'recuit': recuit_sreach}
+            request, "polls/search_result.html",
+            {'searched': searched, 'companys': companySearched, 'recuit': recuit_search}
         )
 
 

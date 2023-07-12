@@ -2,8 +2,8 @@
 {%load static %}
 {% block content %}
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            {% if sreached%}
-                <h1 class="h3 mb-0 text-gray-800">You sreached for {{sreached}}</h1>
+            {% if searched%}
+                <h1 class="h3 mb-0 text-gray-800">You searched for {{searched}}</h1>
                 <a href="{%url 'resume' %}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                     class="fas fa-download fa-sm text-white-50"></i> Update resume</a>
                 </div>
@@ -36,7 +36,7 @@
                         </div>
                     {%endfor%}    
             {% else %}
-                <h1 class="h3 mb-0 text-gray-800">You sreached for nothing</h1>
+                <h1 class="h3 mb-0 text-gray-800">You searched for nothing</h1>
                 <a href="{%url 'resume' %}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                     class="fas fa-download fa-sm text-white-50"></i> Update resume</a>
                 </div>    
