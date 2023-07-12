@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Company, Application, Profile, RecuitmentNew
-from .forms import PostProfile, PostCompany, Postnew, SignUpForm
+from .forms import PostProfile, PostCompany, PostNew, SignUpForm
 from django.contrib import messages
 from django.views import View
 from django.contrib.auth import authenticate, login, decorators, logout
@@ -199,7 +199,7 @@ def show_pro(request, profile_id):
 
 def update_new(request, news_id):
     new = RecuitmentNew.objects.get(pk=news_id)
-    form = Postnew(request.POST or None, instance=new)
+    form = PostNew(request.POST or None, instance=new)
     if request.method == "POST":
         if form.is_valid():
             form.save()
@@ -209,10 +209,10 @@ def update_new(request, news_id):
 
 def add_new(request):
     if request.method == "POST":
-        form = Postnew(request.POST)
+        form = PostNew(request.POST)
         if form.is_valid():
             form.save()
         return redirect("/my_news/")
     else:
-        form = Postnew()
+        form = PostNew()
         return render(request, "polls/add_new.html", {'form': form})
