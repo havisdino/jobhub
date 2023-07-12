@@ -16,7 +16,7 @@ JobHub is a job search website that utilizes advanced technology to provide user
 2. Django ✅
 3. PostgreSQL ✅
 3. RESTful API (In progress)
-4. Natural Language Processing (Transformers) for Autosuggestion (In progress)
+4. NLP for Autosuggestion (In progress)
 
 ## Getting Started
 
