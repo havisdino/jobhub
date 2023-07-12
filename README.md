@@ -12,15 +12,33 @@ JobHub is a job search website that utilizes advanced technology to provide user
 
 ## Technologies Used
 
-1. HTML/CSS
-2. Django
-3. PostgreSQL
-3. RESTful API
-4. Natural Language Processing (Transformers) for Autosuggestion
+1. HTML/CSS ✅
+2. Django ✅
+3. PostgreSQL ✅
+3. RESTful API (In progress)
+4. Natural Language Processing (Transformers) for Autosuggestion (In progress)
 
 ## Getting Started
 
-To get started with the project, simply clone the repository and follow the installation instructions in the README file. Once you have set up the project, you can start browsing and applying for job listings right away!
+* Clone this repository
+```
+git clone https://github.com/havisdino/jobhub.git
+```
+* Start ```psql``` and create a database and the owner
+```
+CREATE USER <your-user-name> WITH PASSWORD <your-pass-word>;
+CREATE DATABASE jobhub WITH OWNER <your-user-name>;
+```
+* Go to database/database, make migrations and apply them all
+```
+cd database/database
+python manage.py makemigrations polls
+python manage.py migrate
+```
+* Start the server
+```
+python manage.py runserver
+```
 
 ## Contributors
 
