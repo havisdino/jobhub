@@ -24,7 +24,7 @@ JobHub is a job search website that utilizes advanced technology to provide user
 ```
 git clone https://github.com/havisdino/jobhub.git
 ```
-* Start ```psql``` and create a database and the owner (drop any existing database named ```jobhub```)
+* Start ```psql```, create a database and the owner (drop any existing database named ```jobhub```)
 ```
 CREATE USER <your-user-name> WITH PASSWORD <your-pass-word>;
 CREATE DATABASE jobhub WITH OWNER <your-user-name>;
