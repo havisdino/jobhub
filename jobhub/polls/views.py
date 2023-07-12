@@ -4,14 +4,14 @@ from .models import company, application, profile, recuitment_new
 from .forms import PostProfile, PostCompany, Postnew, SignUpForm
 from django.contrib import messages
 from django.views import View
-from django.contrib.auth import authenticate, login, decorators,logout
+from django.contrib.auth import authenticate, login, decorators, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
 from time import time
 # Create your views here.
 
 
-class classIndex(View):
+class Index(View):
     def get(View, request):
         return render(request, "polls/index.html")
 
@@ -22,14 +22,14 @@ def view_data(request):
     return render(request, "polls/data.html", context)
 
 
-def detailview(request, company_id):
+def detail_view(request, company_id):
     c = company.objects.get(pk=company_id)
     r = recuitment_new.objects.filter(company=company_id)
     context = {"com": c, "recuit": r}
     return render(request, "polls/detail.html", context)
 
 
-class Weblogin(View):
+class WebLogin(View):
     def get(view, request):
         return render(request, "polls/login.html")
 
@@ -42,12 +42,14 @@ class Weblogin(View):
         login(request, my_user)
         return redirect("/")
 
-def Logout(request):
+
+def logout_(request):
     logout(request)
-    messages.success(request,("See you again!"))
+    messages.success(request, ("See you again!"))
     return redirect('/login/')
 
-class Viewuser(View, LoginRequiredMixin):
+
+class ViewUser(View, LoginRequiredMixin):
     login_url = "/login/"
 
     def get(self, request):
@@ -69,11 +71,11 @@ def register(request):
             form.save()
             username = form.cleaned_data['username']
             password = form.cleaned_data['password1']
-            user = authenticate(username=username,password=password)
-            login(request,user)
-            messages.success(request,("You succesfully register!"))
+            user = authenticate(username=username, password=password)
+            login(request, user)
+            messages.success(request, ("You succesfully register!"))
             return redirect('/')
-    return render(request, "polls/register.html",{'form': form})
+    return render(request, "polls/register.html", {'form': form})
 
 
 def hisview(request):
@@ -82,7 +84,7 @@ def hisview(request):
     return render(request, "polls/history_view.html", context)
 
 
-class tmp(LoginRequiredMixin, View):
+class TMP(LoginRequiredMixin, View):
     login_url = "/login/"
 
     def get(View, request):
@@ -93,24 +95,24 @@ class tmp(LoginRequiredMixin, View):
 
     def post(View, request):
         c = profile.objects.get(user=request.user)
-        q = PostProfile(request.POST, request.FILES,instance=c)
+        q = PostProfile(request.POST, request.FILES, instance=c)
         if q.is_valid():
             q.save()
             messages.info(
-                request, 'Profile của bạn đã được cập nhật!')
+                request, 'Your profile has been updated!')
         else:
-            messages.info(request, 'Opps! không lưu được rồi!')
+            messages.info(request, 'Opps! Something went wrong!')
         return redirect("/tmp_resume/")
 
 
-class recuit(View):
+class Recuit(View):
     def get(View, request):
         c = recuitment_new.objects.all()
         context = {"ds": c}
         return render(request, "polls/news.html", context)
 
 
-class detail_new(View):
+class DetailedNew(View):
     def get(View, request, new_id):
         r = recuitment_new.objects.get(pk=new_id)
         context = {"new": r}
@@ -120,12 +122,12 @@ class detail_new(View):
         r = recuitment_new.objects.get(pk=new_id)
         if request.method == "POST":
             created = application.objects.update_or_create(recuitment_id=r, profile_id=request.user.profile, defaults={
-                                                                'recuitment_id': r, 'profile_id': request.user.profile})
+                'recuitment_id': r, 'profile_id': request.user.profile})
             if created:
                 messages.info(
-                    request, 'bạn đã apply thành công!nãy đợi sự hồi đáp của công ty qua email')
+                    request, 'Applied successfully! Please hold on for out email!')
             else:
-                messages.info(request, 'Bạn đã apply tin này rồi')
+                messages.info(request, 'You have already applied this.')
             return redirect(request.path_info)
 
 
@@ -146,7 +148,7 @@ def qna(request):
 
 def add_com(request):
     if request.method == "POST":
-        form = PostCompany(request.POST,request.FILES)
+        form = PostCompany(request.POST, request.FILES)
         if form.is_valid():
             com = form.save(commit=False)
             com.employer = request.user.id
@@ -203,6 +205,7 @@ def update_new(request, news_id):
             form.save()
             return redirect("/my_news/")
     return render(request, "polls/update_new.html", {'form': form})
+
 
 def add_new(request):
     if request.method == "POST":
