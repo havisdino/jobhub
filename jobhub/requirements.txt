@@ -2,3 +2,6 @@ Django
 python-dotenv
 psycopg2-binary
 dj-database-url
+gunicorn
+pillow
+whitenoise
