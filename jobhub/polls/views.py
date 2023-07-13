@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Company, Application, Profile, RecuitmentNew
+from .models import Company, Application, Profile, RecuitmentNews
 from .forms import PostProfile, PostCompany, PostNew, SignUpForm
 from django.contrib import messages
 from django.views import View
@@ -14,19 +14,6 @@ from time import time
 class Index(View):
     def get(View, request):
         return render(request, "polls/index.html")
-
-
-def view_data(request):
-    c = Company.objects.all()
-    context = {"ds": c}
-    return render(request, "polls/data.html", context)
-
-
-def detail_view(request, company_id):
-    c = Company.objects.get(pk=company_id)
-    r = RecuitmentNew.objects.filter(company=company_id)
-    context = {"com": c, "recuit": r}
-    return render(request, "polls/detail.html", context)
 
 
 class WebLogin(View):
@@ -43,12 +30,6 @@ class WebLogin(View):
         return redirect("/")
 
 
-def logout_(request):
-    logout(request)
-    messages.success(request, ("See you again!"))
-    return redirect('/login/')
-
-
 class ViewUser(View, LoginRequiredMixin):
     login_url = "/login/"
 
@@ -57,6 +38,72 @@ class ViewUser(View, LoginRequiredMixin):
             return redirect("/login/")
         else:
             return redirect("/")
+
+
+class TMP(LoginRequiredMixin, View):
+    login_url = "/login/"
+
+    def get(View, request):
+        c = Profile.objects.get(user=request.user)
+        a = PostProfile(instance=c)
+        context = {'f': a, 'pro': c}
+        return render(request, "polls/tmp_resume.html", context)
+
+    def post(View, request):
+        c = Profile.objects.get(user=request.user)
+        q = PostProfile(request.POST, request.FILES, instance=c)
+        if q.is_valid():
+            q.save()
+            messages.info(
+                request, 'Your profile has been updated!')
+        else:
+            messages.info(request, 'Opps! Something went wrong!')
+        return redirect("/tmp_resume/")
+
+
+class Recuit(View):
+    def get(View, request):
+        c = RecuitmentNews.objects.all()
+        context = {"ds": c}
+        return render(request, "polls/news.html", context)
+
+
+class DetailedNew(View):
+    def get(View, request, new_id):
+        r = RecuitmentNews.objects.get(pk=new_id)
+        context = {"new": r}
+        return render(request, "polls/detail_new.html", context)
+
+    def post(view, request, new_id):
+        r = RecuitmentNews.objects.get(pk=new_id)
+        if request.method == "POST":
+            created = Application.objects.update_or_create(recuitment_id=r, profile_id=request.user.profile, defaults={
+                'recuitment_id': r, 'profile_id': request.user.profile})
+            if created:
+                messages.info(
+                    request, 'Applied successfully! Please hold on for out email!')
+            else:
+                messages.info(request, 'You have already applied this.')
+            return redirect(request.path_info)
+
+
+def view_data(request):
+    c = Company.objects.all()
+    context = {"ds": c}
+    return render(request, "polls/data.html", context)
+
+
+def detail_view(request, company_id):
+    c = Company.objects.get(pk=company_id)
+    r = RecuitmentNews.objects.filter(company=company_id)
+    context = {"com": c, "recuit": r}
+    return render(request, "polls/detail.html", context)
+
+
+def logout_(request):
+    logout(request)
+    messages.success(request, ("See you again!"))
+    return redirect('/login/')
 
 
 def forgot_password(request):
@@ -84,58 +131,11 @@ def hisview(request):
     return render(request, "polls/history_view.html", context)
 
 
-class TMP(LoginRequiredMixin, View):
-    login_url = "/login/"
-
-    def get(View, request):
-        c = Profile.objects.get(user=request.user)
-        a = PostProfile(instance=c)
-        context = {'f': a, 'pro': c}
-        return render(request, "polls/tmp_resume.html", context)
-
-    def post(View, request):
-        c = Profile.objects.get(user=request.user)
-        q = PostProfile(request.POST, request.FILES, instance=c)
-        if q.is_valid():
-            q.save()
-            messages.info(
-                request, 'Your profile has been updated!')
-        else:
-            messages.info(request, 'Opps! Something went wrong!')
-        return redirect("/tmp_resume/")
-
-
-class Recuit(View):
-    def get(View, request):
-        c = RecuitmentNew.objects.all()
-        context = {"ds": c}
-        return render(request, "polls/news.html", context)
-
-
-class DetailedNew(View):
-    def get(View, request, new_id):
-        r = RecuitmentNew.objects.get(pk=new_id)
-        context = {"new": r}
-        return render(request, "polls/detail_new.html", context)
-
-    def post(view, request, new_id):
-        r = RecuitmentNew.objects.get(pk=new_id)
-        if request.method == "POST":
-            created = Application.objects.update_or_create(recuitment_id=r, profile_id=request.user.profile, defaults={
-                'recuitment_id': r, 'profile_id': request.user.profile})
-            if created:
-                messages.info(
-                    request, 'Applied successfully! Please hold on for out email!')
-            else:
-                messages.info(request, 'You have already applied this.')
-            return redirect(request.path_info)
-
-
 def search(request):
     if request.method == "POST":
         searched = request.POST['searched']
         companySearched = Company.objects.filter(name__contains=searched)
-        recuit_search = RecuitmentNew.objects.filter(name__contains=searched)
+        recuit_search = RecuitmentNews.objects.filter(name__contains=searched)
         return render(
             request, "polls/search_result.html",
             {'searched': searched, 'companys': companySearched, 'recuit': recuit_search}
@@ -182,12 +182,12 @@ def my_news(request):
     coms = Company.objects.filter(employer=request.user.id)
     news = []
     for i in coms:
-        news += RecuitmentNew.objects.filter(company=i)
+        news += RecuitmentNews.objects.filter(company=i)
     return render(request, "polls/my_recuit_news.html", {'news': news})
 
 
 def applied_profile(request, news_id):
-    recuit = RecuitmentNew.objects.get(pk=news_id)
+    recuit = RecuitmentNews.objects.get(pk=news_id)
     applied = Application.objects.filter(recuitment_id=recuit)
     return render(request, "polls/applied_pro.html", {'applied': applied})
 
@@ -198,7 +198,7 @@ def show_pro(request, profile_id):
 
 
 def update_new(request, news_id):
-    new = RecuitmentNew.objects.get(pk=news_id)
+    new = RecuitmentNews.objects.get(pk=news_id)
     form = PostNew(request.POST or None, instance=new)
     if request.method == "POST":
         if form.is_valid():

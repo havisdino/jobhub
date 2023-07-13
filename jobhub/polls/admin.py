@@ -1,12 +1,12 @@
 from django.contrib import admin
-from .models import Profile, RecuitmentNew, Application, Company, Catergories
+from .models import Profile, RecuitmentNews, Application, Company, Catergory
 
 
 # admin.site.register(profile)
 # admin.site.register(recuitment_new)
 admin.site.register(Application)
 # admin.site.register(company)
-admin.site.register(Catergories)
+admin.site.register(Catergory)
 
 
 @admin.register(Profile)
@@ -16,7 +16,7 @@ class ProfileAdmin(admin.ModelAdmin):
     search_fields = ('first_name', 'phone', 'address')
 
 
-@admin.register(RecuitmentNew)
+@admin.register(RecuitmentNews)
 class NewsAdmin(admin.ModelAdmin):
     list_display = ('name', 'company', 'catergory')
     list_filter = ('catergory', 'name')
