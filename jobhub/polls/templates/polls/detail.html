@@ -1,22 +1,43 @@
 {% extends "polls/base.html" %}
 
 {% block content %}
-    <table>
-    <tr>    
-        <th>Name</th>
-        <th>Email</th>
-        <th>Phone</th>
-        <th>Field</th>
-    </tr>
-    <tr>    
-        <td>{{com.name}}</td>
-        <td>{{com.email}}</td>
-        <td>{{com.phone}}</td>
-        <td>{{com.field}}</td>
-    </tr>
-    </table>
-    <p>{{com.description_text}}</p>
-    <h3>Company's recuitment new</h3>
+
+    <div class="dtcompany">
+        <img class="coverimg">
+        <div class="dttotal">
+            <img class="logoimg" src="{{com.company_img.url}}">
+            <div class="dtbasicinfor">
+                <h1 class="dtcompanyname" style="text-transform: uppercase;">{{com.name}}</h1>
+                <p class="dtslogan">top 1 cty</p>
+                <div class="dtinfor">
+                    <dt class="dtaddress">Address</dt>
+                    <dd class="dtaddresslink"></dd>
+                    <dt class="dtfield">Field</dt>
+                    <dd class="dtfieldlink">{{com.field}}</dd>
+                    <dt class="dtemail">Email</dt>
+                    <dd class="dtemaillink">{{com.email}}</dd>
+                    <dt class="dtphone">Phone number</dt>
+                    <dd class="dtphonelink">{{com.phone}}</dd>
+                </div>
+            </div>
+            <div class="nothing"></div>
+            <div class="dtjobsearch">
+                <button> See current job vacancies</button>
+            </div>
+        </div>
+        <div class="companyinfor">
+            <h3 class="ciinfor" style="text-transform: uppercase;">Company information</h3>
+            <p class="ciintroduce" style="text-transform: uppercase;">Introduction</p> 
+                             <p>{{com.description_text}}</p>
+            <p class="ciculture" style="text-transform: uppercase;">Corporate culture</p> 
+        </div>
+        <div class="jobinfor">
+            <h3 class="jijobs">Recruitment information</h3>
+        </div>
+    </div>
+        
+    
+    <h3>Company's recruitment new</h3>
     <ul>
         {%for i in recuit%}
         <Li><a href="{%url 'new_detail' i.id%}">{{i.name}}</a></Li>
