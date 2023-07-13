@@ -5,7 +5,9 @@
     <div class="dtcompany">
         <img class="coverimg">
         <div class="dttotal">
+            {%if com.company_img%}
             <img class="logoimg" src="{{com.company_img.url}}">
+            {%endif%}
             <div class="dtbasicinfor">
                 <h1 class="dtcompanyname" style="text-transform: uppercase;">{{com.name}}</h1>
                 <p class="dtslogan">top 1 cty</p>
@@ -32,15 +34,15 @@
             <p class="ciculture" style="text-transform: uppercase;">Corporate culture</p> 
         </div>
         <div class="jobinfor">
-            <h3 class="jijobs">Recruitment information</h3>
+            <h3 style="text-transform: uppercase; font-size: 25px; font-weight:bold;">Company's recruitment news</h3>
+            <ul>
+                {%for i in recuit%}
+                <Li><a href="{%url 'new_detail' i.id%}">{{i.name}}</a></Li>
+                {% endfor %}
+            </ul>
         </div>
     </div>
         
     
-    <h3>Company's recruitment new</h3>
-    <ul>
-        {%for i in recuit%}
-        <Li><a href="{%url 'new_detail' i.id%}">{{i.name}}</a></Li>
-        {% endfor %}
-    </ul>
+    
 {% endblock %}
