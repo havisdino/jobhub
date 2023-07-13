@@ -63,7 +63,9 @@
                 <a class="card1" href="{%url 'new_detail' i.id %}">
                         <div class="row">
                             <div class="col-2">
+                                {%if i.company.company_img%}
                                 <img src="{{i.company.company_img.url}}" alt="company_img" style="border-radius: 50%;width: 100%;"> 
+                                {%endif%}
                             </div>
                             <div class="col-9">
                                 <p class="ncard-title">{{i.name}}</p>
