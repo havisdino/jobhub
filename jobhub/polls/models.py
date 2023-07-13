@@ -41,6 +41,7 @@ class Company(models.Model):
     description_text = models.TextField(max_length=500, null=True)
     employer = models.IntegerField('employer', blank=False, default=1)
 
+    
     def __str__(self):
         return f'{self.id}.{self.name}'
 
