@@ -29,12 +29,11 @@ git clone https://github.com/havisdino/jobhub.git
 CREATE USER <your-user-name> WITH PASSWORD '<your-pass-word>';
 CREATE DATABASE jobhub WITH OWNER <your-user-name>;
 ```
-* Configure the .env file with your own settings.
-* Go to [jobhub](jobhub/), make migrations and apply them all
+* Configure the .env file with your own settings. In case of a remote database, set ```USE_DB_URL=true``` and add a database url which is in the format of ```postgres://username:password@host:port/dbname```
+* Go to [jobhub](jobhub/) and run the build script
 ```
 cd jobhub
-python manage.py makemigrations polls
-python manage.py migrate
+sh build.sh
 ```
 * Start the server
 ```

@@ -17,6 +17,7 @@ import dj_database_url
 
 
 load_dotenv()
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -80,20 +81,25 @@ WSGI_APPLICATION = "database.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-# DATABASES = {
-#     "default": {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': os.environ.get('DB_NAME'),
-#         'USER': os.environ.get('DB_USER'),
-#         'PASSWORD': os.environ.get('DB_PASSWORD'),
-#         'HOST': os.environ.get('DB_HOST'),
-#         'PORT': os.environ.get('DB_PORT')
-#     }
-# }
-
-DATABASES = {
-    'default': dj_database_url.parse(os.environ.get('DB_URL'))
-}
+# If uses custom database info
+if os.environ.get('USE_DB_URL') == 'false':
+    DATABASES = {
+        "default": {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': os.environ.get('DB_NAME'),
+            'USER': os.environ.get('DB_USER'),
+            'PASSWORD': os.environ.get('DB_PASSWORD'),
+            'HOST': os.environ.get('DB_HOST'),
+            'PORT': os.environ.get('DB_PORT')
+        }
+    }
+# If uses a database url
+elif os.environ.get('USE_DB_URL') == 'true':
+    DATABASES = {
+        'default': dj_database_url.parse(os.environ.get('DB_URL'))
+    }
+else:
+    raise ValueError('USE_DB_URL variable only accepts a `true` or `false` value')
 
 
 # Password validation
@@ -143,9 +149,8 @@ if not DEBUG:
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
-
 MEDIA_URL = 'media/'
-MEDIA_ROOT = os.path.join(BASE_DIR,'polls/media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'polls/media')
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
