@@ -10,7 +10,7 @@
                 <h1>Companys</h1>  
                     {%for com in companys%}
                         <div class="card">
-                        <a class="card1" href="{%url 'detailview' com.id%}">
+                        <a class="card1" href="{%url 'detail_view' com.id%}">
                         <p>{{com.name}}</p>
                         <p class="small" >{{com.phone}}</p>
                         <p class="small" >{{com.email}}</p>

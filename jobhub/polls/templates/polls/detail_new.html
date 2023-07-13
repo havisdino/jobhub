@@ -5,7 +5,7 @@
 <p>Mô tả công việc: {{new.job_descrip}}</p>
 <p>Yêu cầu công việc: {{new.job_demand}}</p>
 <p>Lương: {{new.salary}} $</p>
-<p> Công ty: <a href="{%url 'detailview' new.company.id %}" style="text-transform: uppercase;">{{new.company.name}}</a></p>
+<p> Công ty: <a href="{%url 'detail_view' new.company.id %}" style="text-transform: uppercase;">{{new.company.name}}</a></p>
 <img src="{{new.company.company_img.url}}" alt="">
 
 <form method="POST"action="">

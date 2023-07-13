@@ -134,11 +134,11 @@ def hisview(request):
 def search(request):
     if request.method == "POST":
         searched = request.POST['searched']
-        companySearched = Company.objects.filter(name__contains=searched)
+        company_searched = Company.objects.filter(name__contains=searched)
         recuit_search = RecuitmentNews.objects.filter(name__contains=searched)
         return render(
             request, "polls/search_result.html",
-            {'searched': searched, 'companys': companySearched, 'recuit': recuit_search}
+            {'searched': searched, 'companys': company_searched, 'recuit': recuit_search}
         )
 
 
