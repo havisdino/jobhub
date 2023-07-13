@@ -29,6 +29,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
+# DEBUG = 'RENDER' not in os.environ.keys()
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
@@ -44,7 +45,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "whitenoise.runserver_nostatic"
+    "whitenoise.runserver_nostatic",
+    "django_extensions",
 ]
 
 MIDDLEWARE = [
@@ -136,10 +138,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 STATIC_URL = "static/"
-# STATICFILES_DIRS = (
-#     os.path.join(BASE_DIR, "polls/static"),
-# )
-if not DEBUG:
+# if not DEBUG:
+if True: # Fix this later
     # Tell Django to copy statics to the `staticfiles` directory
     # in your application directory on Render.
     STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
