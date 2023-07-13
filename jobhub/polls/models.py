@@ -46,17 +46,17 @@ class Company(models.Model):
         return f'{self.id}.{self.name}'
 
 
-class Catergories(models.Model):
+class Catergory(models.Model):
     name = models.CharField(max_length=100)
 
     def __str__(self):
         return self.name
 
 
-class RecuitmentNew(models.Model):
+class RecuitmentNews(models.Model):
     company = models.ForeignKey(
         Company, on_delete=models.SET_NULL, blank=True, null=True)
-    catergory = models.ForeignKey(Catergories, on_delete=models.CASCADE)
+    catergory = models.ForeignKey(Catergory, on_delete=models.CASCADE)
     name = models.CharField(max_length=50)
     job_descrip = models.TextField(max_length=500)
     job_demand = models.TextField(max_length=500)
@@ -68,7 +68,7 @@ class RecuitmentNew(models.Model):
 
 
 class Application(models.Model):
-    recuitment_id = models.ForeignKey(RecuitmentNew, on_delete=models.CASCADE)
+    recuitment_id = models.ForeignKey(RecuitmentNews, on_delete=models.CASCADE)
     profile_id = models.ForeignKey(Profile, on_delete=models.CASCADE)
     time = models.DateTimeField(auto_now_add=True)
     xxx = models.CharField(max_length=10, null=True)

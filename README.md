@@ -2,6 +2,8 @@
 
 JobHub is a job search website that utilizes advanced technology to provide users with an intuitive and efficient job search experience. The website features an autosuggestion tool that helps users find relevant job listings based on their skillset and preferences.
 
+Give it a try at [JobHub on Render](https://jobhub-dmi0.onrender.com).
+
 ## Features
 
 1. Autosuggestion: The website uses advanced algorithms to suggest job listings based on user input, such as skills and job title.
@@ -24,16 +26,16 @@ JobHub is a job search website that utilizes advanced technology to provide user
 ```
 git clone https://github.com/havisdino/jobhub.git
 ```
-* Start ```psql```, create a database and the owner (drop any existing database named ```jobhub```)
+* Start ```psql```, create a database and the owner
 ```
-CREATE USER <your-user-name> WITH PASSWORD <your-pass-word>;
+CREATE USER <your-user-name> WITH PASSWORD '<your-pass-word>';
 CREATE DATABASE jobhub WITH OWNER <your-user-name>;
 ```
-* Go to [jobhub](jobhub/), make migrations and apply them all
+* Configure the .env file with your own settings. In case of a remote database, set ```USE_DB_URL=true``` and add a database url which is in the format of ```postgres://username:password@host:port/dbname```
+* Go to [jobhub](jobhub/) and run the build script
 ```
 cd jobhub
-python manage.py makemigrations polls
-python manage.py migrate
+sh build.sh
 ```
 * Start the server
 ```
