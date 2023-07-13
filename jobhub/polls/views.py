@@ -170,7 +170,7 @@ def my_com_list(request):
 
 def update_com(request, company_id):
     com = Company.objects.get(pk=company_id)
-    form = PostCompany(request.POST or None, instance=com)
+    form = PostCompany(request.POST or None, request.FILES or None, instance=com)
     if request.method == "POST":
         if form.is_valid():
             form.save()
