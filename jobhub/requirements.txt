@@ -6,3 +6,4 @@ dj-database-url
 gunicorn
 pillow
 whitenoise
+django-filter
