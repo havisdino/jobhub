@@ -4,7 +4,7 @@ from django.core.files.base import File
 from django.db.models.base import Model
 from django.forms.utils import ErrorList
 from django.contrib.auth.models import User
-from .models import Profile, Company, RecuitmentNews
+from .models import Profile, Company, RecruitmentNews
 from django.contrib.auth.forms import UserCreationForm
 
 
@@ -42,7 +42,7 @@ class PostCompany(forms.ModelForm):
 
 class PostNew(forms.ModelForm):
     class Meta:
-        model = RecuitmentNews
+        model = RecruitmentNews
         fields = {'company', 'catergory', 'name', 'job_descrip', 'job_demand'}
         widgets = {
             'name': forms.TextInput(attrs={'class': "form-control"}),

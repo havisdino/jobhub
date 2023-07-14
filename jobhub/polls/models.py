@@ -53,7 +53,7 @@ class Catergory(models.Model):
         return self.name
 
 
-class RecuitmentNews(models.Model):
+class RecruitmentNews(models.Model):
     company = models.ForeignKey(
         Company, on_delete=models.SET_NULL, blank=True, null=True)
     catergory = models.ForeignKey(Catergory, on_delete=models.CASCADE)
@@ -68,10 +68,10 @@ class RecuitmentNews(models.Model):
 
 
 class Application(models.Model):
-    recuitment_id = models.ForeignKey(RecuitmentNews, on_delete=models.CASCADE)
+    recruitment_id = models.ForeignKey(RecruitmentNews, on_delete=models.CASCADE)
     profile_id = models.ForeignKey(Profile, on_delete=models.CASCADE)
     time = models.DateTimeField(auto_now_add=True)
     xxx = models.CharField(max_length=10, null=True)
 
     def __str__(self):
-        return self.recuitment_id.name
+        return self.recruitment_id.name

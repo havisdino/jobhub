@@ -18,8 +18,8 @@
         <tbody>
             {%for i in app%}
                 <tr>
-                    <td><a href="{%url 'new_detail' i.recuitment_id.id %}">{{i.recuitment_id.name}}</a></td>
-                    <td><a href="{%url 'detail_view' i.recuitment_id.company.id %}">{{i.recuitment_id.company.name}}</a></td>
+                    <td><a href="{%url 'new_detail' i.recruitment_id.id %}">{{i.recruitment_id.name}}</a></td>
+                    <td><a href="{%url 'detail_view' i.recruitment_id.company.id %}">{{i.recruitment_id.company.name}}</a></td>
                     <td>{{i.time}}</td>
                 </tr>
             {% endfor %}

@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Company, Application, Profile, RecuitmentNews
+from .models import Company, Application, Profile, RecruitmentNews
 from .forms import PostProfile, PostCompany, PostNew, SignUpForm
 from django.contrib import messages
 from django.views import View
@@ -61,24 +61,24 @@ class TMP(LoginRequiredMixin, View):
         return redirect("/tmp_resume/")
 
 
-class Recuit(View):
+class Recruit(View):
     def get(View, request):
-        c = RecuitmentNews.objects.all()
+        c = RecruitmentNews.objects.all()
         context = {"ds": c}
         return render(request, "polls/news.html", context)
 
 
 class DetailedNew(View):
     def get(View, request, new_id):
-        r = RecuitmentNews.objects.get(pk=new_id)
+        r = RecruitmentNews.objects.get(pk=new_id)
         context = {"new": r}
         return render(request, "polls/detail_new.html", context)
 
     def post(view, request, new_id):
-        r = RecuitmentNews.objects.get(pk=new_id)
+        r = RecruitmentNews.objects.get(pk=new_id)
         if request.method == "POST":
-            created = Application.objects.update_or_create(recuitment_id=r, profile_id=request.user.profile, defaults={
-                'recuitment_id': r, 'profile_id': request.user.profile})
+            created = Application.objects.update_or_create(recruitment_id=r, profile_id=request.user.profile, defaults={
+                'recruitment_id': r, 'profile_id': request.user.profile})
             if created:
                 messages.info(
                     request, 'Applied successfully! Please hold on for out email!')
@@ -95,8 +95,8 @@ def view_data(request):
 
 def detail_view(request, company_id):
     c = Company.objects.get(pk=company_id)
-    r = RecuitmentNews.objects.filter(company=company_id)
-    context = {"com": c, "recuit": r}
+    r = RecruitmentNews.objects.filter(company=company_id)
+    context = {"com": c, "recruit": r}
     return render(request, "polls/detail.html", context)
 
 
@@ -135,10 +135,10 @@ def search(request):
     if request.method == "POST":
         searched = request.POST['searched']
         company_searched = Company.objects.filter(name__contains=searched)
-        recuit_search = RecuitmentNews.objects.filter(name__contains=searched)
+        recruit_search = RecruitmentNews.objects.filter(name__contains=searched)
         return render(
             request, "polls/search_result.html",
-            {'searched': searched, 'companys': company_searched, 'recuit': recuit_search}
+            {'searched': searched, 'companys': company_searched, 'recruit': recruit_search}
         )
 
 
@@ -154,7 +154,7 @@ def add_com(request):
             com.employer = request.user.id
             com.save()
             messages.info(
-                request, 'Your profile has been updated!')
+                request, 'Your information has been updated!')
         else:
             messages.info(request, 'Opps! Something went wrong!')
         return redirect("/my_com/")
@@ -182,13 +182,13 @@ def my_news(request):
     coms = Company.objects.filter(employer=request.user.id)
     news = []
     for i in coms:
-        news += RecuitmentNews.objects.filter(company=i)
-    return render(request, "polls/my_recuit_news.html", {'news': news})
+        news += RecruitmentNews.objects.filter(company=i)
+    return render(request, "polls/my_recruit_news.html", {'news': news})
 
 
 def applied_profile(request, news_id):
-    recuit = RecuitmentNews.objects.get(pk=news_id)
-    applied = Application.objects.filter(recuitment_id=recuit)
+    recruit = RecruitmentNews.objects.get(pk=news_id)
+    applied = Application.objects.filter(recruitment_id=recruit)
     return render(request, "polls/applied_pro.html", {'applied': applied})
 
 
@@ -198,8 +198,9 @@ def show_pro(request, profile_id):
 
 
 def update_new(request, news_id):
-    new = RecuitmentNews.objects.get(pk=news_id)
-    form = PostNew(request.POST or None, instance=new)
+    new = RecruitmentNews.objects.get(pk=news_id)
+    # form = PostNew(request.POST or None, request.FILES or None, instance=new)
+    form = PostNew(request.POST, instance=new)
     if request.method == "POST":
         if form.is_valid():
             form.save()

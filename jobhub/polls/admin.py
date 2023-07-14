@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Profile, RecuitmentNews, Application, Company, Catergory
+from .models import Profile, RecruitmentNews, Application, Company, Catergory
 
 
 # admin.site.register(profile)
@@ -16,7 +16,7 @@ class ProfileAdmin(admin.ModelAdmin):
     search_fields = ('first_name', 'phone', 'address')
 
 
-@admin.register(RecuitmentNews)
+@admin.register(RecruitmentNews)
 class NewsAdmin(admin.ModelAdmin):
     list_display = ('name', 'company', 'catergory')
     list_filter = ('catergory', 'name')
