@@ -7,6 +7,7 @@ from django.views import View
 from django.contrib.auth import authenticate, login, decorators, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
+from .filters import NewFilter
 from time import time
 # Create your views here.
 
@@ -64,7 +65,9 @@ class TMP(LoginRequiredMixin, View):
 class Recruit(View):
     def get(View, request):
         c = RecruitmentNews.objects.all()
-        context = {"ds": c}
+        MyFilter = NewFilter(request.GET,queryset=c)
+        c = MyFilter.qs
+        context = {"ds": c,'MyFilter': MyFilter}
         return render(request, "polls/news.html", context)
 
 

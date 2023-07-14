@@ -40,7 +40,6 @@ class Company(models.Model):
     field = models.CharField(max_length=20)
     description_text = models.TextField(max_length=500, null=True)
     employer = models.IntegerField('employer', blank=False, default=1)
-
     
     def __str__(self):
         return f'{self.id}.{self.name}'
@@ -62,7 +61,8 @@ class RecruitmentNews(models.Model):
     job_demand = models.TextField(max_length=500)
     salary = models.IntegerField(blank=True, null=True)
     experience_demand = models.DurationField(blank=True, null=True)
-
+    posted_at =  models.DateTimeField(auto_now_add=True)
+    deadline = models.DateField(default=datetime.date.today)
     def __str__(self):
         return self.name
 
